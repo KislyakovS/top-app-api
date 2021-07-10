@@ -31,7 +31,7 @@ export class TopPageAdvantage {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface TopPageModel extends Base { }
+export interface TopPageModel extends Base {}
 export class TopPageModel extends TimeStamps {
   @prop({ enum: TopLevelCategory })
   firstCategory: TopLevelCategory;
