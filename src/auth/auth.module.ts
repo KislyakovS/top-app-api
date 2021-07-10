@@ -16,4 +16,4 @@ import { AuthModel } from './auth.model';
     ]),
   ],
 })
-export class AuthModule { }
+export class AuthModule {}
