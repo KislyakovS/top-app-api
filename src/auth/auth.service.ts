@@ -30,14 +30,17 @@ export class AuthService {
     return this.userModel.findOne({ email });
   }
 
-  async validateUser(dto: AuthDto): Promise<Pick<UserModel, 'email'>> {
-    const user = await this.findUserByEmail(dto.login);
+  async validateUser(
+    email: string,
+    password: string,
+  ): Promise<Pick<UserModel, 'email'>> {
+    const user = await this.findUserByEmail(email);
 
     if (!user) {
       throw new UnauthorizedException(USER_NOT_FOUND_ERROR);
     }
 
-    const isCorrectPassword = await compare(dto.password, user.passwordHash);
+    const isCorrectPassword = await compare(password, user.passwordHash);
     if (!isCorrectPassword) {
       throw new UnauthorizedException(WRONG_PASSWORD_ERROR);
     }
