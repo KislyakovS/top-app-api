@@ -1,7 +1,7 @@
 import { prop } from '@typegoose/typegoose';
 import { TimeStamps, Base } from '@typegoose/typegoose/lib/defaultClasses';
 import { Type } from 'class-transformer';
-import { IsArray, IsNumber, IsString } from 'class-validator';
+import { IsArray, IsNumber, IsString, ValidateNested } from 'class-validator';
 
 class ProductSpecification {
   @prop()
@@ -61,6 +61,7 @@ export class ProductModel extends TimeStamps {
   tags: string[];
 
   @IsArray()
+  @ValidateNested()
   @Type(() => ProductSpecification)
   @prop({ type: () => [ProductSpecification], _id: false })
   specifications: ProductSpecification[];
