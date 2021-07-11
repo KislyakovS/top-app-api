@@ -61,7 +61,7 @@ export class ProductModel extends TimeStamps {
   tags: string[];
 
   @IsArray()
-  @ValidateNested()
+  @ValidateNested({ each: true })
   @Type(() => ProductSpecification)
   @prop({ type: () => [ProductSpecification], _id: false })
   specifications: ProductSpecification[];
