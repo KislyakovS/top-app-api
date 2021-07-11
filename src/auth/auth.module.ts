@@ -4,8 +4,10 @@ import { AuthController } from './auth.controller';
 import { UserModel } from './user.model';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule, ConfigModule, ConfigService } from '@nestjs/config';
 import { getJwtSecret } from 'src/configs/jwt.config';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from './strategies/jwt.stratagy';
 
 @Module({
   controllers: [AuthController],
@@ -23,7 +25,9 @@ import { getJwtSecret } from 'src/configs/jwt.config';
       inject: [ConfigService],
       useFactory: getJwtSecret,
     }),
+    ConfigModule,
+    PassportModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, JwtStrategy],
 })
 export class AuthModule { }
